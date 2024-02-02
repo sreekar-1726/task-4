@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Quiz</title>
+</head>
+<body style="text-align: center;color:black">
+
+  <h2>Interactive Quiz</h2>
+
+  <div id="question"></div>
+  <form name="quizForm" id="quizForm">
+    <input type="radio" name="answer" value="a" id="optionA"> <label for="optionA" id="labelA"></label><br>
+    <input type="radio" name="answer" value="b" id="optionB"> <label for="optionB" id="labelB"></label><br>
+    <input type="radio" name="answer" value="c" id="optionC"> <label for="optionC" id="labelC"></label><br><br>
+    <input type="button" value="Submit" onclick="checkAnswer()">
+  </form>
+  <div id="result"></div>
+
+  <script>
+    const quiz = [
+      {
+        question: "What is the capital of France?",
+        options: {
+          a: "Paris",
+          b: "London",
+          c: "Berlin"
+        },
+        correctAnswer: "a"
+      },
+      {
+        question: "Which planet is known as the Red Planet?",
+        options: {
+          a: "Earth",
+          b: "Mars",
+          c: "Venus"
+        },
+        correctAnswer: "b"
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+
+    function displayQuestion() {
+      const currentQuestion = quiz[currentQuestionIndex];
+      document.getElementById('question').textContent = currentQuestion.question;
+      document.getElementById('labelA').textContent = currentQuestion.options.a;
+      document.getElementById('labelB').textContent = currentQuestion.options.b;
+      document.getElementById('labelC').textContent = currentQuestion.options.c;
+    }
+
+    function checkAnswer() {
+      const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+      if (!selectedAnswer) {
+        alert("Please select an answer!");
+        return;
+      }
+
+      const userAnswer = selectedAnswer.value;
+      const correctAnswer = quiz[currentQuestionIndex].correctAnswer;
+
+      if (userAnswer === correctAnswer) {
+        document.getElementById('result').textContent = "Correct!";
+      } else {
+        document.getElementById('result').textContent = "Incorrect. The correct answer is: " + quiz[currentQuestionIndex].options[correctAnswer];
+      }
+
+      
+      currentQuestionIndex++;
+      if (currentQuestionIndex < quiz.length) {
+        setTimeout(displayQuestion, 1000);
+      } else {
+        document.getElementById('quizForm').style.display = "none";
+      }
+    }
+
+    displayQuestion();
+  </script>
+
+</body>
+</html>

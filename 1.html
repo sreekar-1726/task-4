@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Greeting</title>
+</head>
+<body style="text-align: center;color:black">
+  <div id="welcomeMessage"></div> <!-- Added a div to display the greeting message -->
+<script>
+  function welcome() {
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+    let welcomeText; // Changed variable name from welcome to welcomeText
+    if (currentHour >= 5 && currentHour < 12) {
+        welcomeText = 'Good Morning !'; // Assign the welcome to the variable
+    } else if (currentHour >= 12 && currentHour < 18) {
+        welcomeText = 'Good Afternoon !'; // Assign the welcome to the variable
+    } else {
+        welcomeText = 'Good Evening'; // Assign the welcome to the variable
+    }
+    document.getElementById('welcomeMessage').textContent = welcomeText; // Display the welcome in the div
+  }
+  welcome();
+</script>
+</body>
+</html>

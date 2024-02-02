@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body style="text-align: center;color:black">
+
+  <h2>Form Validation</h2>
+
+  <form name="registrationForm" onsubmit="return validateForm()">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name"><br>
+    <span id="nameError" class="error"></span><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email"><br>
+    <span id="emailError" class="error"></span><br>
+
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password"><br>
+    <span id="passwordError" class="error"></span><br>
+
+    <label for="phone">Phone Number:</label><br>
+    <input type="text" id="phone" name="phone"><br>
+    <span id="phoneError" class="error"></span><br>
+
+    <label for="dob">Date of Birth:</label><br>
+    <input type="date" id="dob" name="dob"><br><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    function validateForm() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const phone = document.getElementById('phone').value;
+
+      if (!/^[a-zA-Z]{3,}$/.test(name)) {
+        document.getElementById('nameError').textContent = "Name should contain at least 3 alphabets and no numerics or special characters";
+        return false;
+      } else {
+        document.getElementById('nameError').textContent = "";
+      }
+
+      if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        document.getElementById('emailError').textContent = "Invalid email format";
+        return false;
+      } else {
+        document.getElementById('emailError').textContent = "";
+      }
+
+      if (!/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}/.test(password)) {
+        document.getElementById('passwordError').textContent = "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character";
+        return false;
+      } else {
+        document.getElementById('passwordError').textContent = "";
+      }
+
+      if (!/^\d{10}$/.test(phone)) {
+        document.getElementById('phoneError').textContent = "Phone number should be numeric and contain 10 numbers";
+        return false;
+      } else {
+        document.getElementById('phoneError').textContent = "";
+      }
+
+      return true;
+    }
+  </script>
+
+</body>
+</html>
